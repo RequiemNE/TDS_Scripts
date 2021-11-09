@@ -4,40 +4,57 @@ using UnityEngine;
 
 public class character : MonoBehaviour
 {
+    public float moveSpeed = 5f;
 
-    Rigidbody2D rb2d;
+    private Rigidbody2D rb;
+    public Camera cam;
+    public GameObject crossHair;
+    public float aimDistance = 8f;
 
-    private float horizontal;
-    private float vertical;
+    Vector2 movement;
+    Vector2 mousePos;
 
-    public float forwardSpeed = 2f;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        var velocity = rb2d.velocity;
-        if (Input.GetKey("w"))
-        {
-            rb2d.velocity = new Vector2(horizontal * forwardSpeed, vertical * forwardSpeed);
-        }
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);        
 
-        if (Input.GetKey("s"))
-        {
-            rb2d.velocity = new Vector2(horizontal * -forwardSpeed, vertical * -forwardSpeed);
-        }
+    }
 
-        else
+    private void FixedUpdate()
+    {
+        Movement();
+
+        Shooting();
+    }
+
+    private void Shooting()
+    {
+        crossHair.transform.position = Vector2.MoveTowards(transform.position, mousePos, aimDistance);
+
+        //physics.raycast (from, to, out hit, distance).
+        //physics.raycase (player position ~rb.position, mouse position ~mousePos, out hit, 50f)
+
+        if (Input.GetMouseButtonDown(0))
         {
-            rb2d.velocity = new Vector2(0, 0);
+            Physics.Raycast(rb.position, mousePos, 50f);
         }
+    }
+
+    private void Movement()
+    {
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+        Vector2 lookDir = mousePos - rb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = angle;
     }
 }
