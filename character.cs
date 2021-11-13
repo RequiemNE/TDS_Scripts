@@ -40,8 +40,8 @@ public class character : MonoBehaviour
     {
         crossHair.transform.position = Vector2.MoveTowards(transform.position, mousePos, aimDistance);
 
-        //physics.raycast (from, to, out hit, distance).
-        //physics.raycase (player position ~rb.position, mouse position ~mousePos, out hit, 50f)
+        //physics.raycast(from, to, out hit, distance).
+        //physics.raycase(player position ~rb.position, mouse position ~mousePos, out hit, 50f);
 
         if (Input.GetMouseButtonDown(0))
         {
