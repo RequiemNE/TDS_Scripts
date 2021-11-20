@@ -6,7 +6,7 @@ public class Shooting : MonoBehaviour
 {
 
     public GameObject rayCaster;
-    public GameObject ray;
+    public Transform ray;
     public float pistolDamage = 10f;
     public int bullets = 7;
 
@@ -46,8 +46,6 @@ public class Shooting : MonoBehaviour
             {
 
                 // ADD Sprite muzzle flash
-
-                // ADD RELOAD Sound
 
                 bullets--;
 
