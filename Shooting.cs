@@ -5,7 +5,6 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
 
-    public GameObject rayCaster;
     public Transform ray;
     public float pistolDamage = 10f;
     public int bullets = 7;
@@ -51,7 +50,8 @@ public class Shooting : MonoBehaviour
 
                 audioSource.PlayOneShot(fire);
 
-                RaycastHit2D hit = Physics2D.Raycast(ray.transform.position, rayCaster.transform.position);
+                // TransformDirection FIXED THE PROBLEM!!!!!!! -- Vector2.Up means Forwards from sprite. 
+                RaycastHit2D hit = Physics2D.Raycast(ray.transform.position, ray.transform.TransformDirection(Vector2.up));
 
                 EnemyDamage target = hit.transform.GetComponent<EnemyDamage>();
 
@@ -65,9 +65,7 @@ public class Shooting : MonoBehaviour
                     Debug.Log(hit.collider.name);
                 }
 
-
-
-                Debug.DrawRay(ray.transform.position, rayCaster.transform.position * 10, Color.blue, 5f);
+                Debug.DrawRay(ray.transform.position, ray.transform.TransformDirection(Vector2.up) * 10, Color.blue, 5f);
 
             }
 

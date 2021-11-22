@@ -36,17 +36,14 @@ public class character : MonoBehaviour
         Shooting();
     }
 
+
     private void Shooting()
     {
         crossHair.transform.position = Vector2.MoveTowards(transform.position, mousePos, aimDistance);
 
-        //physics.raycast(from, to, out hit, distance).
-        //physics.raycase(player position ~rb.position, mouse position ~mousePos, out hit, 50f);
+        //crosshair .transform.rotation = character.transform.rotation
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Physics.Raycast(rb.position, mousePos, 50f);
-        }
+        crossHair.transform.rotation = transform.rotation;
     }
 
     private void Movement()
