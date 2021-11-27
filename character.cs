@@ -25,7 +25,9 @@ public class character : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);        
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        Cursor.visible = false;
 
     }
 
@@ -40,8 +42,6 @@ public class character : MonoBehaviour
     private void Shooting()
     {
         crossHair.transform.position = Vector2.MoveTowards(transform.position, mousePos, aimDistance);
-
-        //crosshair .transform.rotation = character.transform.rotation
 
         crossHair.transform.rotation = transform.rotation;
     }

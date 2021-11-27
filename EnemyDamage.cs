@@ -6,6 +6,8 @@ public class EnemyDamage : MonoBehaviour
 {
     public float health = 30f;
 
+    public GameObject body;
+
     public void TakeDamage(float amount)
     {
         health -= amount;
@@ -17,6 +19,11 @@ public class EnemyDamage : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        // get body sprite.
+        //Create with same transform. 
+
+        Instantiate(body, transform.position, transform.rotation);
+
+       Destroy(gameObject);
     }
 }

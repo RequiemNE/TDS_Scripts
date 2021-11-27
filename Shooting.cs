@@ -13,6 +13,7 @@ public class Shooting : MonoBehaviour
     public AudioClip empty;
     public AudioClip reloadSound;
     public AudioClip reloadCockSound;
+    public AudioClip enemyHitSound;
 
 
     public bool canFire = true;
@@ -49,6 +50,7 @@ public class Shooting : MonoBehaviour
                 bullets--;
 
                 audioSource.PlayOneShot(fire);
+                
 
                 // TransformDirection FIXED THE PROBLEM!!!!!!! -- Vector2.Up means Forwards from sprite. 
                 RaycastHit2D hit = Physics2D.Raycast(ray.transform.position, ray.transform.TransformDirection(Vector2.up));
@@ -58,6 +60,7 @@ public class Shooting : MonoBehaviour
                 if (target != null)
                 {
                     target.TakeDamage(pistolDamage);
+                    audioSource.PlayOneShot(enemyHitSound);
                 }
 
                 if (hit.collider != null)
@@ -114,4 +117,12 @@ public class Shooting : MonoBehaviour
         yield return null;
     }
     
+    private void PickupAmmo()
+    {
+        // on collision with ammo
+        // totalAmmo + 10. 
+
+        // Create total ammo count to add in. 
+    }
+
 }
