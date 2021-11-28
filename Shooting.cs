@@ -14,20 +14,24 @@ public class Shooting : MonoBehaviour
     public AudioClip reloadSound;
     public AudioClip reloadCockSound;
     public AudioClip enemyHitSound;
+    public AudioClip pickupAmmo;
 
 
     public bool canFire = true;
 
     private AudioSource audioSource;
-    
+
+    private int totalAmmo = 0;
 
     private Rigidbody2D rb;
     private RaycastHit hit;
+    private Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
         canFire = true;
     }
 
@@ -86,6 +90,7 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             canFire = false;
+            animator.SetTrigger("Reload");
 
             if (bullets > 0)
             {
@@ -117,12 +122,12 @@ public class Shooting : MonoBehaviour
         yield return null;
     }
     
-    private void PickupAmmo()
+    public void PickupAmmo(int ammo)
     {
-        // on collision with ammo
-        // totalAmmo + 10. 
+        totalAmmo += ammo;
+        Debug.Log(totalAmmo);
+        audioSource.PlayOneShot(pickupAmmo);
 
-        // Create total ammo count to add in. 
     }
 
 }
