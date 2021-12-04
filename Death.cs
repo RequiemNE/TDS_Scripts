@@ -7,35 +7,54 @@ public class Death : MonoBehaviour
     public int health = 30;
 
     private SpriteRenderer sprite;
+    public bool canTakeDamage = true;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        // WRAP in a canBeDamaged bool
-        if (collision.gameObject.tag == "Enemy")
+        if (canTakeDamage == true)
         {
-            if (health > 0)
-            {
-                health -= 10;
-                Debug.Log(health);
-                StartCoroutine("PlayerTakesDamage");
-            }
-
-            else
+                  
+            if (collision.gameObject.tag == "Enemy")
             {
 
-                Debug.Log("GAME OVER");
+                canTakeDamage = false;
 
-                // Add death screen
+                if (health > 0)
+                {
+                    health -= 10;
+                    Debug.Log(health);
+                    StartCoroutine("PlayerTakesDamage");
+                    //Add player hit noise
+                }
 
+                else
+                {
+
+                }
             }
+            // SPLIT ifs for seperate enemy tags when they are added in.
+            // Use SWITCH?
+            // Normal zombie -10. Fast zombie -50. Heavy Zombie -15
         }
-        // SPLIT ifs for seperate enemy tags when they are added in.
-        // Use SWITCH?
-        // Normal zombie -10. Fast zombie -50. Heavy Zombie -15
+
+        else
+        {
+
+        }
 
     }
 
+    private void Update()
+    {
+        if (health == 0)
+        {
+
+            Debug.Log("GAME OVER");
+
+            // Add death screen
+
+        }
+    }
 
     IEnumerator PlayerTakesDamage()
     {
@@ -57,6 +76,8 @@ public class Death : MonoBehaviour
         }
 
         sprite.enabled = true;
+        canTakeDamage = true;
+        yield return null;
     }
 
 }
