@@ -21,7 +21,7 @@ public class Shooting : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private int totalAmmo = 0;
+    public int totalAmmo = 21;
 
     private Rigidbody2D rb;
     private RaycastHit hit;
@@ -33,6 +33,7 @@ public class Shooting : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         canFire = true;
+
     }
 
     void Update()
@@ -46,7 +47,7 @@ public class Shooting : MonoBehaviour
          if (Input.GetMouseButtonDown(0) && canFire == true)
          {
 
-            if (bullets > 0)
+            if (bullets > 0 && totalAmmo > 0)
             {
 
                 // ADD Sprite muzzle flash

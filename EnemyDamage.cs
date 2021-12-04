@@ -35,6 +35,7 @@ public class EnemyDamage : MonoBehaviour
     {
 
        Instantiate(body, transform.position, transform.rotation);
+       
 
        Destroy(gameObject);
     }
