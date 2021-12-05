@@ -48,6 +48,18 @@ public class Death : MonoBehaviour
 
     private void Update()
     {
+        IfDies();
+        ShowHealth();
+    }
+
+    private void ShowHealth()
+    {
+        UIManager showHealth = UI.GetComponent<UIManager>();
+        showHealth.UI_health(health);
+    }
+
+    private void IfDies()
+    {
         if (health == 0)
         {
             UIManager deadScript = UI.GetComponent<UIManager>();

@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 
 
     [SerializeField] private Text ammoDisplay;
+    [SerializeField] private Text healthDisplay;
 
 
     // Start is called before the first frame update
@@ -44,6 +45,11 @@ public class UIManager : MonoBehaviour
     public void UI_Ammo(int magAmmo, int totalAmmo)
     {
         ammoDisplay.text = magAmmo + " / " + totalAmmo;
+    }
+
+    public void UI_health(int health)
+    {
+        healthDisplay.text = health + "";
     }
 
 }
