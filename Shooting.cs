@@ -27,6 +27,8 @@ public class Shooting : MonoBehaviour
     private RaycastHit hit;
     private Animator animator;
 
+    [SerializeField] private GameObject UI;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +42,7 @@ public class Shooting : MonoBehaviour
     {
         Shoot();
         reload();
+        DisplayAmmo();
     }
     
     private void Shoot()
@@ -126,8 +129,13 @@ public class Shooting : MonoBehaviour
     public void PickupAmmo(int ammo)
     {
         totalAmmo += ammo;
-        Debug.Log(totalAmmo);
         audioSource.PlayOneShot(pickupAmmo);
+    }
+
+    private void DisplayAmmo()
+    {
+        UIManager ammo = UI.GetComponent<UIManager>();
+        ammo.UI_Ammo(bullets, totalAmmo);
     }
 
 }

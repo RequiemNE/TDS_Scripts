@@ -10,7 +10,6 @@ public class Ammo : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log(ammount);
             Shooting giveAmmo = collision.transform.GetComponent<Shooting>();
             giveAmmo.PickupAmmo(ammount);
 

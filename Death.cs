@@ -1,22 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Death : MonoBehaviour
 {
     public int health = 30;
-    public Image image;
+    public GameObject UI;
 
 
     private SpriteRenderer sprite;
     private bool canTakeDamage = true;
 
-    private void Start()
-    {
-        image.enabled = true;
-        image.GetComponent<CanvasRenderer>().SetAlpha(0f);
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (canTakeDamage == true)
@@ -56,9 +50,8 @@ public class Death : MonoBehaviour
     {
         if (health == 0)
         {
-
-            image.CrossFadeAlpha(1f, 2f, false);
-
+            UIManager deadScript = UI.GetComponent<UIManager>();
+            deadScript.isDead(true);
         }
     }
 
