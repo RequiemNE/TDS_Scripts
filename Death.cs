@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Death : MonoBehaviour
 {
     public int health = 30;
+    public Image image;
+
 
     private SpriteRenderer sprite;
-    public bool canTakeDamage = true;
+    private bool canTakeDamage = true;
 
+    private void Start()
+    {
+        image.enabled = true;
+        image.GetComponent<CanvasRenderer>().SetAlpha(0f);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (canTakeDamage == true)
@@ -29,7 +37,7 @@ public class Death : MonoBehaviour
 
                 else
                 {
-
+                   
                 }
             }
             // SPLIT ifs for seperate enemy tags when they are added in.
@@ -49,9 +57,7 @@ public class Death : MonoBehaviour
         if (health == 0)
         {
 
-            Debug.Log("GAME OVER");
-
-            // Add death screen
+            image.CrossFadeAlpha(1f, 2f, false);
 
         }
     }
@@ -72,7 +78,7 @@ public class Death : MonoBehaviour
                 sprite.enabled = false;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
 
         sprite.enabled = true;

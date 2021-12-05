@@ -128,7 +128,6 @@ public class Shooting : MonoBehaviour
         totalAmmo += ammo;
         Debug.Log(totalAmmo);
         audioSource.PlayOneShot(pickupAmmo);
-
     }
 
 }
