@@ -10,6 +10,16 @@ public class Death : MonoBehaviour
 
     private SpriteRenderer sprite;
     private bool canTakeDamage = true;
+    private AudioSource audioSource;
+
+    [SerializeField] private AudioClip[] hitNoises;
+    [SerializeField] private AudioClip deathNoise;
+    
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,12 +36,15 @@ public class Death : MonoBehaviour
                     health -= 10;
                     Debug.Log(health);
                     StartCoroutine("PlayerTakesDamage");
-                    //Add player hit noise
+                    var rnd = new System.Random();
+                    int hitRnd = rnd.Next(0, hitNoises.Length);
+                    audioSource.PlayOneShot(hitNoises[hitRnd]);
+                    
                 }
 
                 else
                 {
-                   
+                    
                 }
             }
             // SPLIT ifs for seperate enemy tags when they are added in.
@@ -61,9 +74,11 @@ public class Death : MonoBehaviour
     private void IfDies()
     {
         if (health == 0)
-        {
+        {            
             UIManager deadScript = UI.GetComponent<UIManager>();
             deadScript.isDead(true);
+            //audioSource.PlayOneShot(deathNoise);
+            // BUG FOUND - reported to Unity.
         }
     }
 
