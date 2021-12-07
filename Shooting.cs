@@ -50,7 +50,7 @@ public class Shooting : MonoBehaviour
          if (Input.GetMouseButtonDown(0) && canFire == true)
          {
 
-            if (bullets > 0 && totalAmmo > 0)
+            if (bullets > 0)
             {
 
                 // ADD Sprite muzzle flash
@@ -91,21 +91,27 @@ public class Shooting : MonoBehaviour
 
     private void reload ()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && canFire == true)
         {
-            canFire = false;
-            animator.SetTrigger("Reload");
+            canFire = false;            
 
-            if (bullets > 0)
+            if (bullets > 0 && totalAmmo > 0)
             {
+                animator.SetTrigger("Reload");
                 audioSource.PlayOneShot(reloadSound);
                 StartCoroutine("ReloadCoroutine");
             }
 
-            else
+            else if (bullets == 0 && totalAmmo > 0)
             {
+                animator.SetTrigger("Reload");
                 audioSource.PlayOneShot(reloadCockSound);
                 StartCoroutine("FullReloadCoroutine");
+            }
+
+            else
+            {
+                canFire = true;
             }
         }
     }
@@ -113,7 +119,7 @@ public class Shooting : MonoBehaviour
     IEnumerator ReloadCoroutine()
     {
         yield return new WaitForSeconds(4f);
-        bullets = 8;
+        BulletPool(8);
         canFire = true;
         yield return null;
     }
@@ -121,7 +127,7 @@ public class Shooting : MonoBehaviour
     IEnumerator FullReloadCoroutine()
     {
         yield return new WaitForSeconds(5f);
-        bullets = 7;
+        BulletPool(7);
         canFire = true;
         yield return null;
     }
@@ -136,6 +142,54 @@ public class Shooting : MonoBehaviour
     {
         UIManager ammo = UI.GetComponent<UIManager>();
         ammo.UI_Ammo(bullets, totalAmmo);
+    }
+
+    private void BulletPool(int bul)
+    {
+
+        int pool = 0;
+        int bulletCopy = bullets;
+
+        if (totalAmmo > bul)
+        {
+
+
+
+            while (bulletCopy < bul)
+            {
+                pool++;
+                bulletCopy++;
+                Debug.Log("Loop running");
+            }
+
+            Debug.Log("pool: " + pool);
+            Debug.Log("Bc: " + bulletCopy);
+
+            bullets += pool;
+            totalAmmo -= pool;
+
+        }
+
+        else if (totalAmmo < bul)
+        {
+            int totalCopy = totalAmmo;
+
+            while (totalCopy > 0)
+            {
+                // CODE HERE
+            }
+        }
+
+
+
+        if (totalAmmo < 0)
+        {
+            totalAmmo = 0;
+        }
+            Debug.Log("total ammo: " + totalAmmo);
+        
+
+
     }
 
 }
