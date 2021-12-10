@@ -152,9 +152,6 @@ public class Shooting : MonoBehaviour
 
         if (totalAmmo > bul)
         {
-
-
-
             while (bulletCopy < bul)
             {
                 pool++;
@@ -169,16 +166,18 @@ public class Shooting : MonoBehaviour
             totalAmmo -= pool;
 
         }
-
+        
         else if (totalAmmo < bul)
         {
             int totalCopy = totalAmmo;
 
-            while (totalCopy > 0)
+            while (totalAmmo > 0 && bullets < bul)
             {
-                // CODE HERE
+                bullets++;
+                totalAmmo--;
             }
         }
+        
 
 
 
