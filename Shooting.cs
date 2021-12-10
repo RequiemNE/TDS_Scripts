@@ -156,11 +156,7 @@ public class Shooting : MonoBehaviour
             {
                 pool++;
                 bulletCopy++;
-                Debug.Log("Loop running");
             }
-
-            Debug.Log("pool: " + pool);
-            Debug.Log("Bc: " + bulletCopy);
 
             bullets += pool;
             totalAmmo -= pool;
@@ -169,7 +165,6 @@ public class Shooting : MonoBehaviour
         
         else if (totalAmmo < bul)
         {
-            int totalCopy = totalAmmo;
 
             while (totalAmmo > 0 && bullets < bul)
             {
