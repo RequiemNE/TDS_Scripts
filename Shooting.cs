@@ -163,7 +163,7 @@ public class Shooting : MonoBehaviour
 
         }
         
-        else if (totalAmmo < bul)
+        else if (totalAmmo <= bul)
         {
 
             while (totalAmmo > 0 && bullets < bul)

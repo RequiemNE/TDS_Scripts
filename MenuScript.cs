@@ -13,11 +13,13 @@ public class MenuScript : MonoBehaviour
         fadeIn.enabled = true;
         fadeIn.GetComponent<CanvasRenderer>().SetAlpha(1f);
         fadeIn.CrossFadeAlpha(0f, 7f, false);
+        StartCoroutine("DisableBlack");
     }
 
     // Update is called once per frame
-    void Update()
+    IEnumerator DisableBlack()
     {
-        
+        yield return new WaitForSeconds(6f);
+        Destroy(fadeIn);
     }
 }
