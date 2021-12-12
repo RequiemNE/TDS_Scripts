@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,7 +30,6 @@ public class UIManager : MonoBehaviour
 
     public void isDead(bool dead)
     {
-        // Used when Character dies
 
         if (dead == true)
         {
@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
             character.enabled = false;
             Shooting shoot = player.GetComponent<Shooting>();
             shoot.enabled = false;
+            StartCoroutine("RestartLevel");
 
         }
     }
@@ -51,6 +52,13 @@ public class UIManager : MonoBehaviour
     public void UI_health(int health)
     {
         healthDisplay.text = health + "";
+    }
+
+    IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(4f);
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene);
     }
 
 }
