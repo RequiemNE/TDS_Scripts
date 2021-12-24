@@ -13,20 +13,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text ammoDisplay;
     [SerializeField] private Text healthDisplay;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         gameOver.enabled = true;
         gameOver.GetComponent<CanvasRenderer>().SetAlpha(0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void isDead(bool dead)
     {
@@ -52,6 +44,12 @@ public class UIManager : MonoBehaviour
     public void UI_health(int health)
     {
         healthDisplay.text = health + "";
+    }
+
+    public void GoToMainMenu()
+    {
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(1);
     }
 
     IEnumerator RestartLevel()

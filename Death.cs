@@ -31,10 +31,9 @@ public class Death : MonoBehaviour
 
                 canTakeDamage = false;
 
-                if (health > 0)
+                if (health > 10)
                 {
                     health -= 10;
-                    Debug.Log(health);
                     StartCoroutine("PlayerTakesDamage");
                     var rnd = new System.Random();
                     int hitRnd = rnd.Next(0, hitNoises.Length);
@@ -42,9 +41,10 @@ public class Death : MonoBehaviour
                     
                 }
 
-                else
+                else if (health == 10)
                 {
-                    
+                    health -= 10;
+                    IfDies();
                 }
             }
             // SPLIT ifs for seperate enemy tags when they are added in.
@@ -60,8 +60,7 @@ public class Death : MonoBehaviour
     }
 
     private void Update()
-    {
-        IfDies();
+    {        
         ShowHealth();
     }
 
@@ -73,13 +72,16 @@ public class Death : MonoBehaviour
 
     private void IfDies()
     {
-        if (health == 0)
-        {            
-            UIManager deadScript = UI.GetComponent<UIManager>();
-            deadScript.isDead(true);
-            //audioSource.PlayOneShot(deathNoise);
-            // BUG FOUND - reported to Unity.
-        }
+        
+        
+          if (health == 0)
+          {
+              UIManager deadScript = UI.GetComponent<UIManager>();
+              deadScript.isDead(true);
+              audioSource.PlayOneShot(deathNoise);
+          }
+        
+
     }
 
     IEnumerator PlayerTakesDamage()
@@ -105,6 +107,7 @@ public class Death : MonoBehaviour
         canTakeDamage = true;
         yield return null;
     }
+
 
 }
 
