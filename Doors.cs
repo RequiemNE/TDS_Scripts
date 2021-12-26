@@ -37,7 +37,7 @@ public class Doors : MonoBehaviour
 
     private void Update()
     {
-        if (trigger == true && Input.GetKeyDown(KeyCode.E))
+        if (trigger == true && Input.GetKeyDown(KeyCode.E) && !PauseMenu.isPaused)
         {        
             Vector3 rotationToAdd = new Vector3(0, 0, 102);
             door.transform.Rotate(rotationToAdd);

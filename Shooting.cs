@@ -44,10 +44,10 @@ public class Shooting : MonoBehaviour
         reload();
         DisplayAmmo();
     }
-    
+
     private void Shoot()
     {
-         if (Input.GetMouseButtonDown(0) && canFire == true)
+         if (Input.GetMouseButtonDown(0) && canFire == true && !PauseMenu.isPaused)
          {
 
             if (bullets > 0)
@@ -91,7 +91,7 @@ public class Shooting : MonoBehaviour
 
     private void reload ()
     {
-        if (Input.GetKeyDown(KeyCode.R) && canFire == true)
+        if (Input.GetKeyDown(KeyCode.R) && canFire == true && !PauseMenu.isPaused)
         {
             canFire = false;            
 
