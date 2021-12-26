@@ -26,8 +26,11 @@ public class character : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        if (!PauseMenu.isPaused)
+        {
+            Cursor.visible = false;
+        }
 
-        Cursor.visible = false;
 
     }
 
