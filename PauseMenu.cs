@@ -9,8 +9,10 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Image pauseBG;
     [SerializeField] private GameObject pauseMenuStuff;
     [SerializeField] private AudioClip pauseNoise;
+    [SerializeField] private AudioClip menuClick;
     [SerializeField] private GameObject UI;
     [SerializeField] private Button quitB, infoB, infoBack, AYS_yes, AYS_no;
+    [SerializeField] private GameObject AYS;
     [SerializeField] private GameObject infoDetails;
 
     public static bool isPaused = false;
@@ -26,6 +28,8 @@ public class PauseMenu : MonoBehaviour
         quitB.onClick.AddListener(QuitGame);
         infoB.onClick.AddListener(GetInfo);
         infoBack.onClick.AddListener(GoToPause);
+        AYS_no.onClick.AddListener(AYS_No);
+        AYS_yes.onClick.AddListener(AYS_Yes);
     }
 
     // Update is called once per frame
@@ -42,23 +46,27 @@ public class PauseMenu : MonoBehaviour
     {
         if (!isPaused)
         {
+            isPaused = true;
             Time.timeScale = 0;
             Cursor.visible = true;
             pauseMenuStuff.SetActive(true);
             infoDetails.SetActive(false);
+            infoBack.gameObject.SetActive(false);
             AudioListener.pause = true;
-            isPaused = true;
             pauseBG.enabled = true;
+            AYS_no.gameObject.SetActive(false);
+            AYS_yes.gameObject.SetActive(false);
+            AYS.SetActive(false);
         }
 
         else if (isPaused)
         {
+            isPaused = false;
             Time.timeScale = 1;
-            Cursor.visible = false;
             pauseMenuStuff.SetActive(false);
             AudioListener.pause = false;
-            isPaused = false;
             pauseBG.enabled = false;
+            Cursor.visible = false;
         }
     }
 
@@ -67,20 +75,47 @@ public class PauseMenu : MonoBehaviour
         quitB.gameObject.SetActive(false);
         infoB.gameObject.SetActive(false);
         infoDetails.SetActive(true);
-        infoBack.onClick.AddListener(GoToPause);
+        infoBack.gameObject.SetActive(true);
+        PlayMenuclick();
     }
 
     public void GoToPause()
     {
-        Debug.Log("oi");
+        PlayMenuclick();
         infoDetails.SetActive(false);
         infoB.gameObject.SetActive(true);
         quitB.gameObject.SetActive(true);
+        infoBack.gameObject.SetActive(false);
     }
 
     private void QuitGame()
     {
+        PlayMenuclick();
+        AYS.SetActive(true);
+        AYS_no.gameObject.SetActive(true);
+        AYS_yes.gameObject.SetActive(true);
+        quitB.gameObject.SetActive(false);
+        infoB.gameObject.SetActive(false);
+       
+    }
+
+    private void AYS_Yes()
+    {
         UIManager loadMenu = UI.GetComponent<UIManager>();
-        loadMenu.GoToMainMenu();        
+        loadMenu.GoToMainMenu();
+    }
+
+    private void AYS_No()
+    {
+        isPaused = false;
+        PlayMenuclick();
+        infoB.gameObject.SetActive(true);
+        quitB.gameObject.SetActive(true);
+        PauseGame();
+    }
+
+    private void PlayMenuclick()
+    {
+        audioS.PlayOneShot(menuClick);
     }
 }

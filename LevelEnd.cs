@@ -9,6 +9,7 @@ public class LevelEnd : MonoBehaviour
     [SerializeField] private Image black;
     [SerializeField] private GameObject levelManager;
     [SerializeField] private GameObject UI;
+    [SerializeField] private GameObject[] toDisable;
 
     private AudioSource audioS;
     private AudioSource levelManagerAudio;
@@ -32,6 +33,7 @@ public class LevelEnd : MonoBehaviour
                 levelManagerAudio.Stop();
                 black.CrossFadeAlpha(1f, 3f, false);
                 StartCoroutine("EndLevel");
+
             }
         }
     }
