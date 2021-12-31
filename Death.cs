@@ -25,28 +25,24 @@ public class Death : MonoBehaviour
     {
         if (canTakeDamage == true)
         {
-                  
-            if (collision.gameObject.tag == "Enemy")
+            var enemyType = collision.gameObject.tag;
+            switch (enemyType)
             {
+                case "Enemy":
+                    NormalEnemyHit();
+                    break;
+                case "FastEnemy":
+                    FastEnemyHit();
+                    break;
+                default:
+                    break;
 
-                canTakeDamage = false;
-
-                if (health > 10)
-                {
-                    health -= 10;
-                    StartCoroutine("PlayerTakesDamage");
-                    var rnd = new System.Random();
-                    int hitRnd = rnd.Next(0, hitNoises.Length);
-                    audioSource.PlayOneShot(hitNoises[hitRnd]);
-                    
-                }
-
-                else if (health == 10)
-                {
-                    health -= 10;
-                    IfDies();
-                }
             }
+
+
+            //if (collision.gameObject.tag == "Enemy")
+               // NormalEnemyHit();
+
             // SPLIT ifs for seperate enemy tags when they are added in.
             // Use SWITCH?
             // Normal zombie -10. Fast zombie -50. Heavy Zombie -15
@@ -58,6 +54,34 @@ public class Death : MonoBehaviour
         }
 
     }
+
+    private void NormalEnemyHit()
+    {
+        canTakeDamage = false;
+
+        if (health > 10)
+        {
+            health -= 10;
+            StartCoroutine("PlayerTakesDamage");
+            var rnd = new System.Random();
+            int hitRnd = rnd.Next(0, hitNoises.Length);
+            audioSource.PlayOneShot(hitNoises[hitRnd]);
+
+        }
+
+        else if (health == 10)
+        {
+            health -= 10;
+            IfDies();
+        }
+    }
+
+    private void FastEnemyHit()
+    {
+        health = 0;
+        IfDies();
+    }
+
 
     private void Update()
     {        

@@ -13,6 +13,7 @@ public class MenuScript : MonoBehaviour
         fadeIn.enabled = true;
         fadeIn.GetComponent<CanvasRenderer>().SetAlpha(1f);
         fadeIn.CrossFadeAlpha(0f, 7f, false);
+        Cursor.visible = true;
         StartCoroutine("DisableBlack");
     }
 
