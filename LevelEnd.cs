@@ -32,6 +32,7 @@ public class LevelEnd : MonoBehaviour
                 audioS.Play();
                 levelManagerAudio.Stop();
                 black.CrossFadeAlpha(1f, 3f, false);
+                CarryOverAmmo();
                 StartCoroutine("EndLevel");
 
             }
@@ -53,6 +54,29 @@ public class LevelEnd : MonoBehaviour
             trigger = false;
         }
     }
+
+    private void CarryOverAmmo()
+    {
+
+        int magAmmo = 0;
+        int reserveAmmo = 0;
+
+        // Get bullets from player.
+        var player = GameObject.Find("Character");
+        Shooting playerAmmo = player.GetComponent<Shooting>();
+        magAmmo = playerAmmo.bullets;
+        reserveAmmo = playerAmmo.totalAmmo;
+
+        // Pass bullets to be carried over.
+        var ammoSaveObject = GameObject.Find("AmmoSave");
+        AmmoSave ammoSaveScript = ammoSaveObject.GetComponent<AmmoSave>();
+        ammoSaveScript.GetAmmo(magAmmo, reserveAmmo);
+
+        magAmmo = 0;
+        reserveAmmo = 0;        
+
+    }
+
 
     IEnumerator EndLevel()
     {
