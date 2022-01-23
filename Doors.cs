@@ -11,7 +11,6 @@ public class Doors : MonoBehaviour
 
     [SerializeField] private GameObject bg;
 
-
     private void Start()
     {
         audioS = GetComponent<AudioSource>();

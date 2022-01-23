@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelEnd : MonoBehaviour
 {
@@ -34,7 +35,6 @@ public class LevelEnd : MonoBehaviour
                 black.CrossFadeAlpha(1f, 3f, false);
                 CarryOverAmmo();
                 StartCoroutine("EndLevel");
-
             }
         }
     }
@@ -73,8 +73,7 @@ public class LevelEnd : MonoBehaviour
         ammoSaveScript.GetAmmo(magAmmo, reserveAmmo);
 
         magAmmo = 0;
-        reserveAmmo = 0;        
-
+        reserveAmmo = 0;
     }
 
 
@@ -82,7 +81,8 @@ public class LevelEnd : MonoBehaviour
     {
         yield return new WaitForSeconds(15f);
 
-        UIManager loadMenu = UI.GetComponent<UIManager>();
-        loadMenu.GoToMainMenu();
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        int nextScene = scene + 1;
+        SceneManager.LoadScene(nextScene);
     }
 }

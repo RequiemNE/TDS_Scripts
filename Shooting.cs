@@ -16,12 +16,10 @@ public class Shooting : MonoBehaviour
     public AudioClip enemyHitSound;
     public AudioClip pickupAmmo;
 
-
-    public bool canFire = true;
-
     private AudioSource audioSource;
 
     public int totalAmmo = 21;
+    public bool canFire = true;
 
     private Rigidbody2D rb;
     private RaycastHit hit;

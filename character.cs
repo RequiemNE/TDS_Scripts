@@ -30,14 +30,11 @@ public class character : MonoBehaviour
         {
             Cursor.visible = false;
         }
-
-
     }
 
     private void FixedUpdate()
     {
         Movement();
-
         Shooting();
     }
 

@@ -11,13 +11,11 @@ public class EnemySpawn : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-
             var rnd = new System.Random();
             var zomRnd = rnd.Next(0, zombie.Length);
             Instantiate(zombie[zomRnd], zSpawn.transform.position, zSpawn.transform.rotation);
 
-            Destroy(gameObject);
-            
+            Destroy(gameObject); 
         }
     }
 }

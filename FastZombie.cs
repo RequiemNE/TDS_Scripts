@@ -26,9 +26,6 @@ public class FastZombie : MonoBehaviour
                 var noiseRnd = rnd.Next(0, zNoise.Length);
                 audioS.PlayOneShot(zNoise[noiseRnd]);
             }
-
         }
     }
-
-
 }

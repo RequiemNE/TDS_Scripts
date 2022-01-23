@@ -38,19 +38,10 @@ public class Death : MonoBehaviour
                     break;
 
             }
-
-
-            //if (collision.gameObject.tag == "Enemy")
-               // NormalEnemyHit();
-
-            // SPLIT ifs for seperate enemy tags when they are added in.
-            // Use SWITCH?
-            // Normal zombie -10. Fast zombie -50. Heavy Zombie -15
         }
 
         else
         {
-
         }
 
     }
@@ -95,17 +86,13 @@ public class Death : MonoBehaviour
     }
 
     private void IfDies()
-    {
-        
-        
+    {       
           if (health == 0)
           {
               UIManager deadScript = UI.GetComponent<UIManager>();
               deadScript.isDead(true);
               audioSource.PlayOneShot(deathNoise);
           }
-        
-
     }
 
     IEnumerator PlayerTakesDamage()
@@ -131,7 +118,5 @@ public class Death : MonoBehaviour
         canTakeDamage = true;
         yield return null;
     }
-
-
 }
 

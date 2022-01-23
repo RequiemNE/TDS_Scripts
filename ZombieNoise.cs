@@ -21,7 +21,6 @@ public class ZombieNoise : MonoBehaviour
                 StartCoroutine("MakeNoise");
                 trigger = true;
             }
-
         }
     }
 

@@ -11,7 +11,6 @@ public class EnemyDamage : MonoBehaviour
 
     private Rigidbody2D rb2d;
 
-
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();

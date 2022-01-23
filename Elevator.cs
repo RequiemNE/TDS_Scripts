@@ -87,7 +87,6 @@ public class Elevator : MonoBehaviour
             insideLift = false;
             audioS.Play();
 
-
             StartCoroutine("FadeBack");
             StartCoroutine("OpenDoor");
             StartCoroutine("TransportPlayer");
@@ -112,6 +111,5 @@ public class Elevator : MonoBehaviour
         yield return new WaitForSeconds(3);
         character.transform.position = playerTeleport.transform.position;
         canMove = false;
-
     }
 }

@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     public Image gameOver;
     public GameObject player;
 
-
     [SerializeField] private Text ammoDisplay;
     [SerializeField] private Text healthDisplay;
 
@@ -32,7 +31,6 @@ public class UIManager : MonoBehaviour
             Shooting shoot = player.GetComponent<Shooting>();
             shoot.enabled = false;
             StartCoroutine("RestartLevel");
-
         }
     }
 
