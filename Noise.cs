@@ -6,6 +6,7 @@ public class Noise : MonoBehaviour
 {
 
     private AudioSource audioS;
+    public float timeToDestroy = 2f;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class Noise : MonoBehaviour
 
     IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(timeToDestroy);
         Destroy(gameObject);
     }
 }
