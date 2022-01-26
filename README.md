@@ -30,3 +30,5 @@ perspective. Since it's not exactly game of the year material, I couldn't be ars
 Another feature I wanted was weapon jams. If the gun jammed the player would have to hit "R" to unjam. However, by the time I got my code up to a good level, adding this in
 would mean rewriting a lot of the code. This is a great positive for me, since it's a good lesson on planning, and building the initial base bit-by-bit with all of
 (or most) of the intended features, rather than perfecting onc feature, then realising you have to re-do most of it to add something in.
+
+![Cover](https://user-images.githubusercontent.com/78875248/151263865-f559bbf2-975d-4097-af89-08e36e681640.png)
